@@ -1,0 +1,57 @@
+Hermes Agent Base
+Copyright (C) 2026 repository contributors
+
+Source and ownership notice:
+
+1. This repository contains original code, configuration, glue code, and repository-specific modifications prepared for Hermes Agent Base.
+2. This repository also references or may include third-party components from separate upstream projects.
+3. Ownership of those upstream projects remains with their respective copyright holders.
+4. Nothing in this repository's top-level licensing is intended to reassign ownership of third-party code to this repository's operators or contributors.
+
+Repository-level licensing:
+
+- The repository's own original code and repository-specific modifications are offered under `AGPL-3.0-only`, unless a file states otherwise.
+- A separate commercial license may be available for the repository-controlled portions only.
+- Third-party components remain under their own original licenses.
+
+Known upstream components and provenance:
+
+- `NousResearch/hermes-agent`
+  - Source: https://github.com/NousResearch/hermes-agent
+  - Upstream license: MIT
+  - Ownership: upstream rights holders
+
+- `open-policy-agent/opa`
+  - Source: https://github.com/open-policy-agent/opa
+  - Upstream license: Apache-2.0
+  - Ownership: upstream rights holders
+
+- `UKPLab/sentence-transformers`
+  - Source: https://github.com/UKPLab/sentence-transformers
+  - Upstream license: Apache-2.0
+  - Ownership: upstream rights holders
+
+- `qdrant/qdrant` and `qdrant-client`
+  - Source: https://github.com/qdrant/qdrant
+  - Upstream license: Apache-2.0
+  - Ownership: upstream rights holders
+
+- `valkey-io/valkey`
+  - Source: https://github.com/valkey-io/valkey
+  - Upstream license: BSD-3-Clause
+  - Ownership: upstream rights holders
+
+- `valkey-io/valkey-py`
+  - Source: https://github.com/valkey-io/valkey-py
+  - Upstream license: MIT
+  - Ownership: upstream rights holders
+
+- `google/gvisor`
+  - Source: https://github.com/google/gvisor
+  - Upstream license: Apache-2.0
+  - Ownership: upstream rights holders
+
+Distribution note:
+
+- When redistributing this repository, preserve upstream notices and license files for included third-party components where applicable.
+- For a dependency-level summary, see `AGPL_AUDIT.md` and `third_party/COMPONENTS.md`.
