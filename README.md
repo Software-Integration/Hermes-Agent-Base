@@ -16,6 +16,9 @@ Read:
 - [LICENSE](/C:/Users/wushe/Desktop/Main%20Agent/LICENSE)
 - [COMMERCIAL_LICENSE.md](/C:/Users/wushe/Desktop/Main%20Agent/COMMERCIAL_LICENSE.md)
 - [NOTICE](/C:/Users/wushe/Desktop/Main%20Agent/NOTICE)
+- [COPYRIGHT.md](/C:/Users/wushe/Desktop/Main%20Agent/COPYRIGHT.md)
+- [CONTRIBUTING.md](/C:/Users/wushe/Desktop/Main%20Agent/CONTRIBUTING.md)
+- [SECURITY.md](/C:/Users/wushe/Desktop/Main%20Agent/SECURITY.md)
 - [AGPL_AUDIT.md](/C:/Users/wushe/Desktop/Main%20Agent/AGPL_AUDIT.md)
 
 Important:
@@ -29,6 +32,7 @@ Important:
 For source origins and licensing boundaries, see:
 
 - [NOTICE](/C:/Users/wushe/Desktop/Main%20Agent/NOTICE)
+- [COPYRIGHT.md](/C:/Users/wushe/Desktop/Main%20Agent/COPYRIGHT.md)
 - [AGPL_AUDIT.md](/C:/Users/wushe/Desktop/Main%20Agent/AGPL_AUDIT.md)
 - [third_party/COMPONENTS.md](/C:/Users/wushe/Desktop/Main%20Agent/third_party/COMPONENTS.md)
 
