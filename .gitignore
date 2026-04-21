@@ -1,0 +1,9 @@
+.env
+.pytest_cache/
+third_party/
+test-data/
+data/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd

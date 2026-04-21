@@ -1,0 +1,121 @@
+services:
+  hermes-base:
+    build:
+      context: .
+    container_name: hermes-commercial-base
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - app_data:/app/data
+      - ./opa/policies:/app/opa/policies:ro
+    read_only: true
+    tmpfs:
+      - /tmp
+    networks:
+      - backend
+    depends_on:
+      - valkey
+      - qdrant
+      - opa
+    environment:
+      HERMES_SOURCE_DIR: /app/hermes-agent
+      APP_DATA_DIR: /app/data
+      HOME: /app/data/home
+      HF_HOME: /app/data/hf-home
+      TRANSFORMERS_CACHE: /app/data/transformers-cache
+      HUGGINGFACE_HUB_CACHE: /app/data/hf-home/hub
+      SANDBOX_MODE: LOCAL
+      SANDBOX_SECCOMP_PROFILE: /app/sandbox/seccomp/default.json
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/healthz', timeout=2)"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 768M
+
+  valkey:
+    image: valkey/valkey:9.0.3-alpine
+    container_name: hermes-valkey
+    restart: unless-stopped
+    command: ["valkey-server", "--save", "", "--appendonly", "no"]
+    expose:
+      - "6379"
+    volumes:
+      - valkey_data:/data
+    networks:
+      - backend
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: hermes-qdrant
+    restart: unless-stopped
+    expose:
+      - "6333"
+      - "6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    networks:
+      - backend
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "/usr/bin/bash", "-lc", "exec 3<>/dev/tcp/127.0.0.1/6333"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+
+  opa:
+    image: openpolicyagent/opa:1.15.2-static
+    container_name: hermes-opa
+    restart: unless-stopped
+    command:
+      - "run"
+      - "--server"
+      - "--addr=0.0.0.0:8181"
+      - "--set=decision_logs.console=true"
+      - "--ignore=.*"
+      - "/policies"
+    expose:
+      - "8181"
+    volumes:
+      - ./opa/policies:/policies:ro
+    networks:
+      - backend
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+    healthcheck:
+      test: ["CMD", "/opa", "eval", "data.hermes.authz.decision"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  app_data:
+  valkey_data:
+  qdrant_data:
+
+networks:
+  backend:
+    driver: bridge
